@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 @Injectable()
 export class RolesGuard implements CanActivate {
     constructor(
-        private reflector: Reflector
+      private reflector: Reflector
     ) {
     }
 
@@ -15,18 +15,20 @@ export class RolesGuard implements CanActivate {
         if (!roles) {
             return true;
         }
-        console.log(roles)
 
         // console.log(roles)
         const request = context.switchToHttp().getRequest();
         const user: any = request.user;
 
+        console.log(user)
         const hasRole = () => roles.indexOf(user.role) > -1;
         let hasPermission: boolean = false;
+
 
         if (hasRole()) {
             hasPermission = true;
         }
+
         return user && hasPermission;
     }
 }

@@ -1,15 +1,4 @@
-import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
-import { AwsModule } from "./aws/aws.module";
-import { ConfigModule } from "@nestjs/config";
-import { AwsService } from "./aws/aws.service";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { UserModule } from "./user/user.module";
-
 import { CrudConfigService } from "@nestjsx/crud";
-import { AuthModule } from "./auth/auth.module";
-
 CrudConfigService.load({
   query: {
     limit: 25,
@@ -19,7 +8,18 @@ CrudConfigService.load({
     only: ["getOneBase", "updateOneBase", "getManyBase", "createOneBase", "deleteOneBase"]
   }
 });
-
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { ConfigModule } from "@nestjs/config";
+import { AwsService } from "./aws/aws.service";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { UserModule } from "./user/user.module";
+import { AuthModule } from "./auth/auth.module";
+import { TagModule } from "./tag/tag.module";
+import { PostModule } from "./post/post.module";
+import { HeadingModule } from "./heading/heading.module";
+import { AwsModule } from "./aws/aws.module";
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -41,7 +41,10 @@ CrudConfigService.load({
     }),
     AwsModule,
     UserModule,
-    AuthModule
+    AuthModule,
+    TagModule,
+    PostModule,
+    HeadingModule
   ],
   controllers: [AppController],
   providers: [AppService, AwsService]

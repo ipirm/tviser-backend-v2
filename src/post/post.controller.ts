@@ -1,34 +1,74 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { PostService } from './post.service';
-import { CreatePostDto } from './dto/create-post.dto';
-import { UpdatePostDto } from './dto/update-post.dto';
+import { Controller, Param, UseGuards } from "@nestjs/common";
+import { PostService } from "./post.service";
+import { ApiBearerAuth, ApiSecurity, ApiTags } from "@nestjs/swagger";
+import { Crud, CrudController, CrudRequest, Override, ParsedBody, ParsedRequest } from "@nestjsx/crud";
+import { PostEntity } from "./entities/post.entity";
+import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 
-@Controller('post')
-export class PostController {
-  constructor(private readonly postService: PostService) {}
 
-  @Post()
-  create(@Body() createPostDto: CreatePostDto) {
-    return this.postService.create(createPostDto);
+@ApiBearerAuth()
+@ApiSecurity("bearer")
+@UseGuards(JwtAuthGuard)
+@ApiTags("Post")
+@Crud({
+  model: {
+    type: PostEntity
+  },
+  query: {
+    join: {
+      headings: {
+        eager: true
+      },
+      tags: {
+        eager: true
+      }
+    }
+  }
+})
+@Controller("api/post")
+export class PostController implements CrudController<PostEntity> {
+  constructor(public service: PostService) {
   }
 
-  @Get()
-  findAll() {
-    return this.postService.findAll();
+  @Override()
+  createOne(
+    @ParsedRequest() req: CrudRequest,
+    @ParsedBody() dto: PostEntity
+  ): Promise<PostEntity> {
+    return this.service.createOneBase(req, dto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.postService.findOne(+id);
+  @Override()
+  updateOne(
+    @ParsedRequest() req: CrudRequest,
+    @ParsedBody() dto: PostEntity,
+    @Param("id") id: number
+  ): Promise<any> {
+    return this.service.updateOneBase(req, dto, id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
-    return this.postService.update(+id, updatePostDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.postService.remove(+id);
-  }
+  // @Post()
+  // create(@Body() createPostDto: CreatePostDto) {
+  //   return this.postService.create(createPostDto);
+  // }
+  //
+  // @Get()
+  // findAll() {
+  //   return this.postService.findAll();
+  // }
+  //
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.postService.findOne(+id);
+  // }
+  //
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
+  //   return this.postService.update(+id, updatePostDto);
+  // }
+  //
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.postService.remove(+id);
+  // }
 }

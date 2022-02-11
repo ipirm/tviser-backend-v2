@@ -6,13 +6,11 @@ import { User } from "./entities/user.entity";
 import { UserDto } from "./dto/user.dto";
 import { UserManyDto } from "./dto/user-many.dto";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
-import { RolesGuard } from "../auth/guards/roles.guard";
-import { Roles } from "../decorators/roles.decorator";
-import { Role } from "../enums/roles.enum";
 
 
-@UseGuards(JwtAuthGuard, RolesGuard)
-@Roles(Role.Admin)
+@ApiBearerAuth()
+@ApiSecurity("bearer")
+@UseGuards(JwtAuthGuard)
 @ApiTags("User")
 @Crud({
   model: {
@@ -23,8 +21,6 @@ import { Role } from "../enums/roles.enum";
     get: UserDto
   }
 })
-@ApiBearerAuth()
-@ApiSecurity("bearer")
 @Controller("api/user")
 export class UserController implements CrudController<User> {
   constructor(public service: UserService) {

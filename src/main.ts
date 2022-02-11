@@ -5,15 +5,19 @@ import { Logger, ValidationPipe } from "@nestjs/common";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   const logger = new Logger("NestFactory");
 
-  const config = new DocumentBuilder()
-    .setTitle("Tviser Agency API")
+  const options = new DocumentBuilder()
+    .setTitle("Tviser Agency REST API")
     .setDescription("The API service of Tviser Agency")
     .setVersion("1.0")
     .addBearerAuth()
     .build();
-  const document = SwaggerModule.createDocument(app, config);
+
+  const document = SwaggerModule.createDocument(app, options,{
+    // extraModels: [ExtraModel],
+  });
 
   app.useGlobalPipes(new ValidationPipe({
     forbidUnknownValues: true,

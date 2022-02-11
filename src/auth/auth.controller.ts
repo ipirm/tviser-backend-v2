@@ -14,11 +14,11 @@ export class AuthController {
     constructor(private auth: AuthService) {
     }
 
-    @Post("login-admin")
-    @ApiOperation({ summary: "Login as Admin" })
-    adminLogin(@Body() loginDto: LoginDto) {
-        return this.auth.adminLogin(loginDto);
-    }
+    // @Post("login-admin")
+    // @ApiOperation({ summary: "Login as Admin" })
+    // adminLogin(@Body() loginDto: LoginDto) {
+    //     return this.auth.adminLogin(loginDto);
+    // }
 
 
     @ApiBearerAuth()

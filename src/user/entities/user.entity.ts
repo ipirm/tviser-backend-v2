@@ -5,28 +5,32 @@ import { BaseEntity } from "../../database/entities/base.entity";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsEnum, IsOptional, IsString } from "class-validator";
 import { ApiModelProperty } from "@nestjs/swagger/dist/decorators/api-model-property.decorator";
+import { IsUniq } from "@join-com/typeorm-class-validator-is-uniq";
+import { ImageInterface } from "../../interfaces/image.inteface";
 
 const { faker } = require("@faker-js/faker");
 
 @Entity("user")
-
 export class User extends BaseEntity {
 
-  @ApiProperty({ example: faker.name.firstName(), description: "Имя", required: true })
+  @ApiProperty({ example: "Ильхам", description: "Имя", required: true })
   @IsString()
   @Column()
+  @IsOptional()
   name: string;
 
-  @ApiProperty({ example: faker.internet.email(faker.name.firstName()), description: "Почта", required: true })
+  @ApiProperty({ example: "ilham.pirm++22@gmail.com", description: "Почта", required: true })
   @IsEmail()
+  @IsUniq()
+  @IsOptional()
   @Column({ unique: true })
   email: string;
 
   @ApiProperty({ example: "152", description: "Пароль", required: true })
   @IsString()
+  @IsOptional()
   @Column()
   password: string;
-
 
   @ApiProperty({
     type: "simple-json",
@@ -38,7 +42,7 @@ export class User extends BaseEntity {
   })
   @IsOptional()
   @Column("simple-json", { nullable: true })
-  avatar: { name: string, url: string };
+  avatar: ImageInterface;
 
   @IsEnum(Role)
   @ApiModelProperty({
@@ -46,6 +50,7 @@ export class User extends BaseEntity {
     default: Role.User
   })
   @Column("enum", { enum: Role, default: Role.User })
+  @IsOptional()
   role: Role;
 
   @Column({ type: "integer", default: Math.floor(Math.random() * 10) })
@@ -58,7 +63,6 @@ export class User extends BaseEntity {
 
   @BeforeUpdate()
   async generatePasswordHashUpdate(): Promise<void> {
-    if (this.password !== this.password)
-      this.password = await bcrypt.hashSync(this.password, bcrypt.genSaltSync(this.salt));
+    this.password = await bcrypt.hashSync(this.password, bcrypt.genSaltSync(this.salt));
   }
 }

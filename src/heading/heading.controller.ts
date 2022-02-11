@@ -1,34 +1,59 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { HeadingService } from './heading.service';
-import { CreateHeadingDto } from './dto/create-heading.dto';
-import { UpdateHeadingDto } from './dto/update-heading.dto';
+import { Controller, UseGuards } from "@nestjs/common";
+import { HeadingService } from "./heading.service";
+import { ApiBearerAuth, ApiSecurity, ApiTags } from "@nestjs/swagger";
+import { Crud, CrudController } from "@nestjsx/crud";
+import { Heading } from "./entities/heading.entity";
+import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 
-@Controller('heading')
-export class HeadingController {
-  constructor(private readonly headingService: HeadingService) {}
 
-  @Post()
-  create(@Body() createHeadingDto: CreateHeadingDto) {
-    return this.headingService.create(createHeadingDto);
+@ApiBearerAuth()
+@ApiSecurity("bearer")
+@UseGuards(JwtAuthGuard)
+@ApiTags("Heading")
+@Crud({
+  model: {
+    type: Heading
+  },
+  query: {
+    join: {
+      posts: {
+        eager: true
+      },
+      'posts.tags': {
+        alias: "tags",
+        eager: true,
+        exclude: ['color','createdAt','updatedAt']
+      }
+    }
+  }
+})
+@Controller("api/heading")
+export class HeadingController implements CrudController<Heading> {
+  constructor(public readonly service: HeadingService) {
   }
 
-  @Get()
-  findAll() {
-    return this.headingService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.headingService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateHeadingDto: UpdateHeadingDto) {
-    return this.headingService.update(+id, updateHeadingDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.headingService.remove(+id);
-  }
+  // @Post()
+  // create(@Body() createHeadingDto: CreateHeadingDto) {
+  //   return this.headingService.create(createHeadingDto);
+  // }
+  //
+  // @Get()
+  // findAll() {
+  //   return this.headingService.findAll();
+  // }
+  //
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.headingService.findOne(+id);
+  // }
+  //
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateHeadingDto: UpdateHeadingDto) {
+  //   return this.headingService.update(+id, updateHeadingDto);
+  // }
+  //
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.headingService.remove(+id);
+  // }
 }
