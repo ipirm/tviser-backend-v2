@@ -8,7 +8,7 @@ import { JwtStrategy } from "./jwt/jwt.strategy";
 import { UserService } from "../user/user.service";
 import { RolesGuard } from "./guards/roles.guard";
 import { AwsModule } from "../aws/aws.module";
-import { User } from "../user/entities/user.entity";
+import { UserEntity } from "../user/entities/user.entity";
 
 @Module({
     imports: [
@@ -17,7 +17,7 @@ import { User } from "../user/entities/user.entity";
             secret: jwtConstants.secret,
             signOptions: { expiresIn: "286400s" }
         }),
-        TypeOrmModule.forFeature([User])],
+        TypeOrmModule.forFeature([UserEntity])],
     providers: [AuthService, JwtStrategy, UserService, RolesGuard],
     controllers: [AuthController]
 })

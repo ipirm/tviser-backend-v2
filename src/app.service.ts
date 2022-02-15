@@ -9,4 +9,6 @@ export class AppService {
   async uploadFile(file: Express.Multer.File, alt: string): Promise<any> {
     return await this.aws.uploadFile(file, alt);
   }
+
+
 }

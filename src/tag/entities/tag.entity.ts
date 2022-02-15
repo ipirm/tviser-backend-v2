@@ -6,7 +6,7 @@ import { IsOptional, IsString } from "class-validator";
 import { IsUniq } from "@join-com/typeorm-class-validator-is-uniq";
 
 @Entity("tag")
-export class Tag extends BaseEntity {
+export class TagEntity extends BaseEntity {
 
   @ApiProperty({ example: "Какой то пост с каким то названием", description: "Заголовок", required: true })
   @IsString()

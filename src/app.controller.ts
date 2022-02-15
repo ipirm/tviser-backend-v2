@@ -11,8 +11,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {
   }
 
-  @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  // @ApiBearerAuth()
+  // @UseGuards(JwtAuthGuard)
   @ApiParam({
     name: "alt",
     required: true,

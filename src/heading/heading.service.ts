@@ -1,11 +1,11 @@
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Heading } from "./entities/heading.entity";
+import { HeadingEntity } from "./entities/heading.entity";
 
 
-export class HeadingService extends TypeOrmCrudService<Heading> {
-  constructor(@InjectRepository(Heading) private readonly heading: Repository<Heading>) {
+export class HeadingService extends TypeOrmCrudService<HeadingEntity> {
+  constructor(@InjectRepository(HeadingEntity) private readonly heading: Repository<HeadingEntity>) {
     super(heading);
   }
 

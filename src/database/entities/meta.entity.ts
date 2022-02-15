@@ -5,7 +5,7 @@ import { IsOptional, IsString } from "class-validator";
 import { ImageInterface } from "../../interfaces/image.inteface";
 
 @Entity("meta")
-export class Meta extends BaseEntity {
+export class MetaEntity extends BaseEntity {
 
   @ApiProperty({ example: "Meta title", description: "meta_title", required: true })
   @IsString()

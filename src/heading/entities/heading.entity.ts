@@ -2,11 +2,11 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsOptional, IsString } from "class-validator";
 import { Column, Entity, JoinTable, ManyToMany } from "typeorm";
 import { IsUniq } from "@join-com/typeorm-class-validator-is-uniq";
-import { Meta } from "../../database/entities/meta.entity";
+import { MetaEntity } from "../../database/entities/meta.entity";
 import { PostEntity } from "../../post/entities/post.entity";
 
 @Entity("heading")
-export class Heading extends Meta {
+export class HeadingEntity extends MetaEntity {
 
   @ApiProperty({ example: "Какой то пост с каким то названием", description: "Заголовок", required: true })
   @IsString()

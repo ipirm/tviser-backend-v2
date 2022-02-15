@@ -2,7 +2,7 @@ import { Controller, UseGuards } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { ApiBearerAuth, ApiSecurity, ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController } from "@nestjsx/crud";
-import { User } from "./entities/user.entity";
+import { UserEntity } from "./entities/user.entity";
 import { UserDto } from "./dto/user.dto";
 import { UserManyDto } from "./dto/user-many.dto";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
@@ -14,7 +14,7 @@ import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 @ApiTags("User")
 @Crud({
   model: {
-    type: User
+    type: UserEntity
   },
   serialize: {
     getMany: UserManyDto,
@@ -22,7 +22,7 @@ import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
   }
 })
 @Controller("api/user")
-export class UserController implements CrudController<User> {
+export class UserController implements CrudController<UserEntity> {
   constructor(public service: UserService) {
   }
 

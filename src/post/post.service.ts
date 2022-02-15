@@ -4,16 +4,16 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { PostEntity } from "./entities/post.entity";
 import { CrudRequest } from "@nestjsx/crud";
-import { Tag } from "../tag/entities/tag.entity";
-import { Heading } from "../heading/entities/heading.entity";
+import { TagEntity } from "../tag/entities/tag.entity";
+import { HeadingEntity } from "../heading/entities/heading.entity";
 
 
 @Injectable()
 export class PostService extends TypeOrmCrudService<PostEntity> {
   constructor(
     @InjectRepository(PostEntity) private readonly post: Repository<PostEntity>,
-    @InjectRepository(Tag) private readonly tag: Repository<Tag>,
-    @InjectRepository(Heading) private readonly heading: Repository<Heading>
+    @InjectRepository(TagEntity) private readonly tag: Repository<TagEntity>,
+    @InjectRepository(HeadingEntity) private readonly heading: Repository<HeadingEntity>
   ) {
     super(post);
   }

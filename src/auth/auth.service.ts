@@ -6,14 +6,14 @@ import { UserService } from "../user/user.service";
 import { LoginDto } from "./dto/login-dto";
 import * as bcrypt from "bcrypt";
 import { Role } from "../enums/roles.enum";
-import { User } from "../user/entities/user.entity";
+import { UserEntity } from "../user/entities/user.entity";
 
 @Injectable()
 export class AuthService {
     constructor(
       private jwtService: JwtService,
       private userService: UserService,
-      @InjectRepository(User) private readonly user: Repository<User>
+      @InjectRepository(UserEntity) private readonly user: Repository<UserEntity>
     ) {
     }
 

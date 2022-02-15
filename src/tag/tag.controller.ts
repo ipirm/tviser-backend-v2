@@ -2,7 +2,7 @@ import { Controller, UseGuards } from "@nestjs/common";
 import { TagService } from "./tag.service";
 import { ApiBearerAuth, ApiSecurity, ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController } from "@nestjsx/crud";
-import { Tag } from "./entities/tag.entity";
+import { TagEntity } from "./entities/tag.entity";
 import { MetaInstance } from "../interfaces/meta.interface";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 
@@ -12,7 +12,7 @@ import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 @ApiTags("Tag")
 @Crud({
   model: {
-    type: Tag
+    type: TagEntity
   },
   query: {
     join: {
@@ -28,7 +28,7 @@ import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
   }
 })
 @Controller("api/tag")
-export class TagController implements CrudController<Tag> {
+export class TagController implements CrudController<TagEntity> {
   constructor(public service: TagService) {
   }
 

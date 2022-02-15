@@ -20,6 +20,12 @@ import { TagModule } from "./tag/tag.module";
 import { PostModule } from "./post/post.module";
 import { HeadingModule } from "./heading/heading.module";
 import { AwsModule } from "./aws/aws.module";
+import { LeadModule } from "./lead/lead.module";
+import { PortfolioModule } from "./portfolio/portfolio.module";
+import { ScheduleModule } from "@nestjs/schedule";
+import { BrandModule } from './brand/brand.module';
+
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -40,11 +46,15 @@ import { AwsModule } from "./aws/aws.module";
       })
     }),
     AwsModule,
+    ScheduleModule.forRoot(),
     UserModule,
     AuthModule,
     TagModule,
     PostModule,
-    HeadingModule
+    HeadingModule,
+    LeadModule,
+    PortfolioModule,
+    BrandModule
   ],
   controllers: [AppController],
   providers: [AppService, AwsService]

@@ -3,13 +3,13 @@ import { PostService } from "./post.service";
 import { PostController } from "./post.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { PostEntity } from "./entities/post.entity";
-import { Tag } from "../tag/entities/tag.entity";
-import { Heading } from "../heading/entities/heading.entity";
+import { TagEntity } from "../tag/entities/tag.entity";
+import { HeadingEntity } from "../heading/entities/heading.entity";
 
 @Module({
   controllers: [PostController],
   imports: [
-    TypeOrmModule.forFeature([PostEntity,Tag,Heading])
+    TypeOrmModule.forFeature([PostEntity, TagEntity, HeadingEntity])
   ],
   providers: [PostService]
 })

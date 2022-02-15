@@ -2,7 +2,7 @@ import { Controller, UseGuards } from "@nestjs/common";
 import { HeadingService } from "./heading.service";
 import { ApiBearerAuth, ApiSecurity, ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController } from "@nestjsx/crud";
-import { Heading } from "./entities/heading.entity";
+import { HeadingEntity } from "./entities/heading.entity";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 
 
@@ -12,23 +12,23 @@ import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 @ApiTags("Heading")
 @Crud({
   model: {
-    type: Heading
+    type: HeadingEntity
   },
   query: {
     join: {
       posts: {
         eager: true
       },
-      'posts.tags': {
+      "posts.tags": {
         alias: "tags",
         eager: true,
-        exclude: ['color','createdAt','updatedAt']
+        exclude: ["color", "createdAt", "updatedAt"]
       }
     }
   }
 })
 @Controller("api/heading")
-export class HeadingController implements CrudController<Heading> {
+export class HeadingController implements CrudController<HeadingEntity> {
   constructor(public readonly service: HeadingService) {
   }
 

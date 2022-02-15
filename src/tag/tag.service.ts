@@ -2,12 +2,12 @@ import { Injectable } from "@nestjs/common";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Tag } from "./entities/tag.entity";
+import { TagEntity } from "./entities/tag.entity";
 
 
 @Injectable()
-export class TagService extends TypeOrmCrudService<Tag> {
-  constructor(@InjectRepository(Tag) private readonly tag: Repository<Tag>) {
+export class TagService extends TypeOrmCrudService<TagEntity> {
+  constructor(@InjectRepository(TagEntity) private readonly tag: Repository<TagEntity>) {
     super(tag);
   }
 

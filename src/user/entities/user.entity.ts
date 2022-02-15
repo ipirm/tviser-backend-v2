@@ -11,15 +11,15 @@ import { ImageInterface } from "../../interfaces/image.inteface";
 const { faker } = require("@faker-js/faker");
 
 @Entity("user")
-export class User extends BaseEntity {
+export class UserEntity extends BaseEntity {
 
-  @ApiProperty({ example: "Ильхам", description: "Имя", required: true })
+  @ApiProperty({ example: "Саша", description: "Имя", required: true })
   @IsString()
   @Column()
   @IsOptional()
   name: string;
 
-  @ApiProperty({ example: "ilham.pirm++22@gmail.com", description: "Почта", required: true })
+  @ApiProperty({ example: "sasha++22@gmail.com", description: "Почта", required: true })
   @IsEmail()
   @IsUniq()
   @IsOptional()
