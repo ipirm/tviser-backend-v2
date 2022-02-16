@@ -11,7 +11,7 @@ import { ApiTags } from "@nestjs/swagger";
     type: CategoryEntity
   }
 })
-@Controller("category")
+@Controller("api/category")
 export class CategoryController implements CrudController<CategoryEntity> {
   constructor(public service: CategoryService) {
   }
