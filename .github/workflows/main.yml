@@ -34,6 +34,6 @@ jobs:
      
           script: |
             # run server
-            cd ${remote_dir}
+            cd tviser-backend
             pm2 kill
             pm2 start "npm run start" --name tviser-backend-v2
