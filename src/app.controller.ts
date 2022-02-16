@@ -1,8 +1,7 @@
-import { Controller, Param, Post, UploadedFile, UseGuards, UseInterceptors } from "@nestjs/common";
+import { Controller, Delete, Param, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { AppService } from "./app.service";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
-import { JwtAuthGuard } from "./auth/guards/jwt-auth.guard";
+import { ApiBody, ApiConsumes, ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
 
 
 @ApiTags("Default")
@@ -20,7 +19,14 @@ export class AppController {
     example: "Картинка Чувака",
     description: "Alt Файла"
   })
-  @ApiOperation({ summary: "Загрузка файлов на сервер" })
+  @ApiParam({
+    name: "folder",
+    required: true,
+    type: String,
+    example: "portfolio",
+    description: "Папка сохранения файла"
+  })
+  @ApiOperation({ summary: "Загрузка файла на сервер" })
   @ApiBody({
     schema: {
       type: "object",
@@ -33,12 +39,36 @@ export class AppController {
     }
   })
   @ApiConsumes("multipart/form-data")
-  @Post("upload/:alt")
+  @Post("upload/:alt/:folder")
   @UseInterceptors(FileInterceptor("file"))
   uploadFile(
     @UploadedFile() file: Express.Multer.File,
-    @Param("alt") alt: string
+    @Param("alt") alt: string,
+    @Param("folder") folder: string
   ) {
-    return this.appService.uploadFile(file, alt);
+    return this.appService.uploadFile(file, alt, folder);
+  }
+
+  @ApiParam({
+    name: "name",
+    required: true,
+    type: String,
+    example: "Name",
+    description: "Название файла"
+  })
+  @ApiParam({
+    name: "folder",
+    required: true,
+    type: String,
+    example: "portfolio",
+    description: "Папка сохранения файла"
+  })
+  @ApiOperation({ summary: "Удаление файла с сервера" })
+  @Delete("remove/:name/:folder")
+  removeFile(
+    @Param("name") name: string,
+    @Param("folder") folder: string
+  ) {
+    return this.appService.removeFile(name, folder);
   }
 }
