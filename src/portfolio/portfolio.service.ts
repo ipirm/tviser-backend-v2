@@ -3,11 +3,12 @@ import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
 import { PortfolioEntity } from "./entities/portfolio.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import { I18nRepository } from "typeorm-i18n";
 
 @Injectable()
 export class PortfolioService extends TypeOrmCrudService<PortfolioEntity> {
   constructor(
-    @InjectRepository(PortfolioEntity) private readonly portfolio: Repository<PortfolioEntity>
+    @InjectRepository(PortfolioEntity) private readonly portfolio: I18nRepository<PortfolioEntity>
   ) {
     super(portfolio);
   }

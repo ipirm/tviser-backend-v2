@@ -4,6 +4,8 @@ import { Column, Entity, JoinTable, ManyToMany } from "typeorm";
 import { BaseEntity } from "../../database/entities/base.entity";
 import { ImageInterface } from "../../interfaces/image.inteface";
 import { PortfolioEntity } from "../../portfolio/entities/portfolio.entity";
+import { I18nColumn } from "typeorm-i18n";
+import { DefaultLocale, SupportedLocales } from "../../locale/locale";
 
 
 @Entity("brand")
@@ -12,14 +14,41 @@ export class BrandEntity extends BaseEntity {
   @ApiProperty({ example: "LG", description: "Название бренда/Партнера", required: true })
   @IsString()
   @IsOptional()
+  @I18nColumn({
+    default_language: DefaultLocale,
+    languages: SupportedLocales
+  })
   @Column({ type: "varchar", length: 500, nullable: true })
   name: string;
 
-  @ApiProperty({ example: "LG", description: "Слэг", required: true })
+  @ApiProperty({
+    example: "LG",
+    description: "Название бренда/Партнера Англ",
+    required: true
+  })
+  @IsOptional()
+  @IsString()
+  name__en: string;
+
+  @ApiProperty({ example: "lg-brand", description: "Слэг", required: true })
   @IsString()
   @IsOptional()
+  @I18nColumn({
+    default_language: DefaultLocale,
+    languages: SupportedLocales
+  })
   @Column({ type: "varchar", length: 500, nullable: true })
   slug: string;
+
+  @ApiProperty({
+    example: "lg-brand",
+    description: "Слэг Англ",
+    required: true
+  })
+  @IsOptional()
+  @IsString()
+  slug__en: string;
+
 
   @ApiProperty({ example: true, description: "Партнер", required: true })
   @IsBoolean()

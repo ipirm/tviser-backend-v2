@@ -5,6 +5,8 @@ import { IsOptional, IsString } from "class-validator";
 import { ImageInterface } from "../../interfaces/image.inteface";
 import { IsUniq } from "@join-com/typeorm-class-validator-is-uniq";
 import { BrandEntity } from "../../brand/entities/brand.entity";
+import { I18nColumn } from "typeorm-i18n";
+import { DefaultLocale, SupportedLocales } from "../../locale/locale";
 
 
 @Entity("portfolio")
@@ -13,8 +15,21 @@ export class PortfolioEntity extends MetaEntity {
   @ApiProperty({ example: "Какой то пост с каким то названием", description: "Заголовок", required: true })
   @IsString()
   @IsOptional()
+  @I18nColumn({
+    default_language: DefaultLocale,
+    languages: SupportedLocales
+  })
   @Column({ type: "varchar", length: 500, nullable: true })
   title: string;
+
+  @ApiProperty({
+    example: "Some post with some title",
+    description: "Заголовок Англ",
+    required: false
+  })
+  @IsOptional()
+  @IsString()
+  title__en: string;
 
   @ApiProperty({
     type: "simple-json",
@@ -46,18 +61,43 @@ export class PortfolioEntity extends MetaEntity {
   @Column("simple-json", { default: null })
   files: ImageInterface[];
 
-  @ApiProperty({ example: "url", description: "Слэг", required: true })
+  @ApiProperty({ example: "lg-brand", description: "Слэг", required: true })
   @IsString()
-  @IsUniq()
   @IsOptional()
-  @Column({ unique: true })
+  @I18nColumn({
+    default_language: DefaultLocale,
+    languages: SupportedLocales
+  })
+  @Column({ type: "varchar", length: 500, nullable: true })
   slug: string;
+
+  @ApiProperty({
+    example: "lg-brand",
+    description: "Слэг Англ",
+    required: true
+  })
+  @IsOptional()
+  @IsString()
+  slug__en: string;
 
   @ApiProperty({ example: "Текст", description: "Текст поста", required: true })
   @IsString()
   @IsOptional()
+  @I18nColumn({
+    default_language: DefaultLocale,
+    languages: SupportedLocales
+  })
   @Column({ type: "varchar", length: 65000, nullable: true })
   text: string;
+
+  @ApiProperty({
+    example: "Some post with some title",
+    description: "Текст Англ",
+    required: false
+  })
+  @IsOptional()
+  @IsString()
+  text__en: string;
 
   @ApiProperty({ example: [1, 2], description: "brands", required: true })
   @IsOptional()

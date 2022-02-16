@@ -5,9 +5,9 @@ import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 import { Crud, CrudController } from "@nestjsx/crud";
 import { LeadEntity } from "./entities/lead.entity";
 
-@ApiBearerAuth()
-@ApiSecurity("bearer")
-@UseGuards(JwtAuthGuard)
+// @ApiBearerAuth()
+// @ApiSecurity("bearer")
+// @UseGuards(JwtAuthGuard)
 @ApiTags("Lead")
 @Crud({
   model: {

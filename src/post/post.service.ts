@@ -6,14 +6,15 @@ import { PostEntity } from "./entities/post.entity";
 import { CrudRequest } from "@nestjsx/crud";
 import { TagEntity } from "../tag/entities/tag.entity";
 import { HeadingEntity } from "../heading/entities/heading.entity";
+import { I18nRepository } from "typeorm-i18n";
 
 
 @Injectable()
 export class PostService extends TypeOrmCrudService<PostEntity> {
   constructor(
-    @InjectRepository(PostEntity) private readonly post: Repository<PostEntity>,
-    @InjectRepository(TagEntity) private readonly tag: Repository<TagEntity>,
-    @InjectRepository(HeadingEntity) private readonly heading: Repository<HeadingEntity>
+    @InjectRepository(PostEntity) private readonly post: I18nRepository<PostEntity>,
+    @InjectRepository(TagEntity) private readonly tag: I18nRepository<TagEntity>,
+    @InjectRepository(HeadingEntity) private readonly heading: I18nRepository<HeadingEntity>
   ) {
     super(post);
   }

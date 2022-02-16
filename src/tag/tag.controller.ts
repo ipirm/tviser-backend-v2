@@ -6,9 +6,9 @@ import { TagEntity } from "./entities/tag.entity";
 import { MetaInstance } from "../interfaces/meta.interface";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 
-@ApiBearerAuth()
-@ApiSecurity("bearer")
-@UseGuards(JwtAuthGuard)
+// @ApiBearerAuth()
+// @ApiSecurity("bearer")
+// @UseGuards(JwtAuthGuard)
 @ApiTags("Tag")
 @Crud({
   model: {

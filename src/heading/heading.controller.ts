@@ -6,9 +6,9 @@ import { HeadingEntity } from "./entities/heading.entity";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 
 
-@ApiBearerAuth()
-@ApiSecurity("bearer")
-@UseGuards(JwtAuthGuard)
+// @ApiBearerAuth()
+// @ApiSecurity("bearer")
+// @UseGuards(JwtAuthGuard)
 @ApiTags("Heading")
 @Crud({
   model: {

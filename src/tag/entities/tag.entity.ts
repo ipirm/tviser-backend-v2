@@ -3,7 +3,8 @@ import { Column, Entity, JoinTable, ManyToMany } from "typeorm";
 import { PostEntity } from "../../post/entities/post.entity";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsOptional, IsString } from "class-validator";
-import { IsUniq } from "@join-com/typeorm-class-validator-is-uniq";
+import { I18nColumn } from "typeorm-i18n";
+import { DefaultLocale, SupportedLocales } from "../../locale/locale";
 
 @Entity("tag")
 export class TagEntity extends BaseEntity {
@@ -11,23 +12,42 @@ export class TagEntity extends BaseEntity {
   @ApiProperty({ example: "Какой то пост с каким то названием", description: "Заголовок", required: true })
   @IsString()
   @IsOptional()
-  @Column({ type: "varchar", length: 500, nullable: false })
+  @I18nColumn({
+    default_language: DefaultLocale,
+    languages: SupportedLocales
+  })
+  @Column({ type: "varchar", length: 500, nullable: true })
   title: string;
 
-  @ApiProperty({ example: "url", description: "Слэг", required: true })
-  @IsString()
-  @IsUniq()
+  @ApiProperty({
+    example: "Some post with some title",
+    description: "Заголовок Англ",
+    required: false
+  })
   @IsOptional()
-  @Column({ unique: true })
+  @IsString()
+  title__en: string;
+
+  @ApiProperty({ example: "lg-brand", description: "Слэг", required: true })
+  @IsString()
+  @IsOptional()
+  @I18nColumn({
+    default_language: DefaultLocale,
+    languages: SupportedLocales
+  })
+  @Column({ type: "varchar", length: 500, nullable: true })
   slug: string;
 
-  @ApiProperty({ example: "f5f5f5", description: "Цвет", required: false })
-  @IsString()
+  @ApiProperty({
+    example: "lg-brand",
+    description: "Слэг Англ",
+    required: true
+  })
   @IsOptional()
-  @Column({ type: "varchar", length: 500, nullable: true })
-  color: string;
-
+  @IsString()
+  slug__en: string;
   @ManyToMany(() => PostEntity, t => t.tags)
   @JoinTable()
   posts: PostEntity[];
+
 }

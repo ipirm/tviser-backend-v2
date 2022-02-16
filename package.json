@@ -45,6 +45,7 @@
     "swagger-ui-express": "^4.3.0",
     "ts-transformer-keys": "^0.4.3",
     "typeorm": "^0.2.41",
+    "typeorm-i18n": "^0.2.0-rc.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

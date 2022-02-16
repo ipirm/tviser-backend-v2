@@ -6,9 +6,9 @@ import { PostEntity } from "./entities/post.entity";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 
 
-@ApiBearerAuth()
-@ApiSecurity("bearer")
-@UseGuards(JwtAuthGuard)
+// @ApiBearerAuth()
+// @ApiSecurity("bearer")
+// @UseGuards(JwtAuthGuard)
 @ApiTags("Post")
 @Crud({
   model: {

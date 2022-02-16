@@ -13,6 +13,7 @@ async function bootstrap() {
     .setDescription("The API service of Tviser Agency")
     .setVersion("1.0")
     .addBearerAuth()
+    .setContact("Tviser Agency Support", "mailto:hello@tviser.agency", "hello@tviser.agency")
     .build();
 
   const document = SwaggerModule.createDocument(app, options,{
