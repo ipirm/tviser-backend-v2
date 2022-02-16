@@ -1,5 +1,4 @@
 import { Column, Entity, ManyToMany, ManyToOne } from "typeorm";
-import { MetaEntity } from "../../database/entities/meta.entity";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsOptional, IsString } from "class-validator";
 import { ImageInterface } from "../../interfaces/image.inteface";
@@ -7,10 +6,11 @@ import { BrandEntity } from "../../brand/entities/brand.entity";
 import { I18nColumn } from "typeorm-i18n";
 import { DefaultLocale, SupportedLocales } from "../../locale/locale";
 import { CategoryEntity } from "../../category/entities/category.entity";
+import { BaseEntity } from "../../database/entities/base.entity";
 
 
 @Entity("portfolio")
-export class PortfolioEntity extends MetaEntity {
+export class PortfolioEntity extends BaseEntity {
 
   @ApiProperty({ example: "Title", description: "Title", required: true })
   @IsString()
