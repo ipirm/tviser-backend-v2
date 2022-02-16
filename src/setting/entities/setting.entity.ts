@@ -60,7 +60,7 @@ export class SettingEntity extends BaseSocialEntity {
   @IsOptional()
   middle_link__en: { title: string, url: string }[];
 
-  @ApiProperty({ example: "Какой то пост с каким то названием", description: "Заголовок", required: false })
+  @ApiProperty({ example: "Title", description: "Title", required: false })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -71,15 +71,15 @@ export class SettingEntity extends BaseSocialEntity {
   title: string;
 
   @ApiProperty({
-    example: "Some post with some title",
-    description: "Заголовок Англ",
+    example: "Title (Eng)",
+    description: "Title (Eng)",
     required: false
   })
   @IsOptional()
   @IsString()
   title__en: string;
 
-  @ApiProperty({ example: "Описание", description: "Краткое описание", required: false })
+  @ApiProperty({ example: "Description", description: "Description", required: false })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -91,7 +91,7 @@ export class SettingEntity extends BaseSocialEntity {
 
   @ApiProperty({
     example: "Description",
-    description: "Описание Англ",
+    description: "Description (Eng)",
     required: false
   })
   @IsOptional()

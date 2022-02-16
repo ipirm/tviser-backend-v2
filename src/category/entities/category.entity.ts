@@ -9,7 +9,7 @@ import { PortfolioEntity } from "../../portfolio/entities/portfolio.entity";
 @Entity("category")
 export class CategoryEntity extends MetaEntity {
 
-  @ApiProperty({ example: "Какой то пост с каким то названием", description: "Заголовок", required: true })
+  @ApiProperty({ example: "Title", description: "Title", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -20,15 +20,15 @@ export class CategoryEntity extends MetaEntity {
   title: string;
 
   @ApiProperty({
-    example: "Some post with some title",
-    description: "Заголовок Англ",
+    example: "Title (Eng)",
+    description: "Title (Eng)",
     required: false
   })
   @IsOptional()
   @IsString()
   title__en: string;
 
-  @ApiProperty({ example: "lg-brand", description: "Слэг", required: true })
+  @ApiProperty({ example: "lg-brand", description: "Url", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -40,14 +40,14 @@ export class CategoryEntity extends MetaEntity {
 
   @ApiProperty({
     example: "lg-brand",
-    description: "Слэг Англ",
+    description: "Url (Eng)",
     required: true
   })
   @IsOptional()
   @IsString()
   slug__en: string;
 
-  @ApiProperty({ example: "Описание", description: "Краткое описание", required: true })
+  @ApiProperty({ example: "Description", description: "Description", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -59,7 +59,7 @@ export class CategoryEntity extends MetaEntity {
 
   @ApiProperty({
     example: "Description",
-    description: "Описание Англ",
+    description: "Description (Eng)",
     required: false
   })
   @IsOptional()

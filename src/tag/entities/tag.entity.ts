@@ -9,7 +9,7 @@ import { DefaultLocale, SupportedLocales } from "../../locale/locale";
 @Entity("tag")
 export class TagEntity extends BaseEntity {
 
-  @ApiProperty({ example: "Какой то пост с каким то названием", description: "Заголовок", required: true })
+  @ApiProperty({ example: "Title", description: "Title", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -20,15 +20,15 @@ export class TagEntity extends BaseEntity {
   title: string;
 
   @ApiProperty({
-    example: "Some post with some title",
-    description: "Заголовок Англ",
+    example: "Title (Eng)",
+    description: "Title (Eng)",
     required: false
   })
   @IsOptional()
   @IsString()
   title__en: string;
 
-  @ApiProperty({ example: "lg-brand", description: "Слэг", required: true })
+  @ApiProperty({ example: "lg-brand", description: "Url", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -40,12 +40,13 @@ export class TagEntity extends BaseEntity {
 
   @ApiProperty({
     example: "lg-brand",
-    description: "Слэг Англ",
+    description: "Url (Eng)",
     required: true
   })
   @IsOptional()
   @IsString()
   slug__en: string;
+  
   @ManyToMany(() => PostEntity, t => t.tags)
   @JoinTable()
   posts: PostEntity[];

@@ -16,17 +16,17 @@ export class AppController {
     name: "alt",
     required: true,
     type: String,
-    example: "Картинка Чувака",
-    description: "Alt Файла"
+    example: "Image",
+    description: "Alt file"
   })
   @ApiParam({
     name: "folder",
     required: true,
     type: String,
     example: "portfolio",
-    description: "Папка сохранения файла"
+    description: "File folder"
   })
-  @ApiOperation({ summary: "Загрузка файла на сервер" })
+  @ApiOperation({ summary: "Upload file to server" })
   @ApiBody({
     schema: {
       type: "object",
@@ -54,16 +54,16 @@ export class AppController {
     required: true,
     type: String,
     example: "Name",
-    description: "Название файла"
+    description: "File Name"
   })
   @ApiParam({
     name: "folder",
     required: true,
     type: String,
     example: "portfolio",
-    description: "Папка сохранения файла"
+    description: "File folder"
   })
-  @ApiOperation({ summary: "Удаление файла с сервера" })
+  @ApiOperation({ summary: "Remove file from server" })
   @Delete("remove/:name/:folder")
   removeFile(
     @Param("name") name: string,

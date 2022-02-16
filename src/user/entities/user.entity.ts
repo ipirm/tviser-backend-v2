@@ -8,25 +8,24 @@ import { ApiModelProperty } from "@nestjs/swagger/dist/decorators/api-model-prop
 import { IsUniq } from "@join-com/typeorm-class-validator-is-uniq";
 import { ImageInterface } from "../../interfaces/image.inteface";
 
-const { faker } = require("@faker-js/faker");
 
 @Entity("user")
 export class UserEntity extends BaseEntity {
 
-  @ApiProperty({ example: "Саша", description: "Имя", required: true })
+  @ApiProperty({ example: "Sasha", description: "Name", required: true })
   @IsString()
   @Column()
   @IsOptional()
   name: string;
 
-  @ApiProperty({ example: "sasha++22@gmail.com", description: "Почта", required: true })
+  @ApiProperty({ example: "sasha++22@gmail.com", description: "Email", required: true })
   @IsEmail()
   @IsUniq()
   @IsOptional()
   @Column({ unique: true })
   email: string;
 
-  @ApiProperty({ example: "152", description: "Пароль", required: true })
+  @ApiProperty({ example: "152", description: "Password", required: true })
   @IsString()
   @IsOptional()
   @Column()
@@ -35,10 +34,10 @@ export class UserEntity extends BaseEntity {
   @ApiProperty({
     type: "simple-json",
     example: {
-      alt: "картинка чувака",
+      alt: "Avatar",
       url: "https://tviserbuckets.storage.yandexcloud.net/8722fb29-eab8-45c1-b1d9-50d6d3ebe470/79f4bc96707441%201.png"
     },
-    description: "Аватар"
+    description: "Avatar"
   })
   @IsOptional()
   @Column("simple-json", { nullable: true })

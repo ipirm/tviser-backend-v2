@@ -11,7 +11,7 @@ import { DefaultLocale, SupportedLocales } from "../../locale/locale";
 @Entity("brand")
 export class BrandEntity extends BaseEntity {
 
-  @ApiProperty({ example: "LG", description: "Название бренда/Партнера", required: true })
+  @ApiProperty({ example: "LG", description: "Brand/Partner", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -23,14 +23,14 @@ export class BrandEntity extends BaseEntity {
 
   @ApiProperty({
     example: "LG",
-    description: "Название бренда/Партнера Англ",
+    description: "Brand/Partner (ENG)",
     required: true
   })
   @IsOptional()
   @IsString()
   name__en: string;
 
-  @ApiProperty({ example: true, description: "Партнер", required: true })
+  @ApiProperty({ example: true, description: "isPartner", required: true })
   @IsBoolean()
   @IsOptional()
   @Column({ type: "boolean", default: false })
@@ -39,10 +39,10 @@ export class BrandEntity extends BaseEntity {
   @ApiProperty({
     type: "simple-json",
     example: {
-      alt: "Картинка",
+      alt: "Image",
       url: "https://tviserbuckets.storage.yandexcloud.net/8722fb29-eab8-45c1-b1d9-50d6d3ebe470/79f4bc96707441%201.png"
     },
-    description: "Картинка"
+    description: "Image"
   })
   @IsOptional()
   @Column("simple-json", { default: null })

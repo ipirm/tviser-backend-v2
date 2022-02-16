@@ -11,7 +11,7 @@ import { DefaultLocale, SupportedLocales } from "../../locale/locale";
 @Entity("post")
 export class PostEntity extends MetaEntity {
 
-  @ApiProperty({ example: "Какой то пост с каким то названием", description: "Заголовок", required: true })
+  @ApiProperty({ example: "Title", description: "Title", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -22,15 +22,15 @@ export class PostEntity extends MetaEntity {
   title: string;
 
   @ApiProperty({
-    example: "Some post with some title",
-    description: "Заголовок Англ",
+    example: "Title (Eng)",
+    description: "Title (Eng)",
     required: false
   })
   @IsOptional()
   @IsString()
   title__en: string;
 
-  @ApiProperty({ example: "Подзаголовок", description: "Подзаголовок", required: true })
+  @ApiProperty({ example: "Subtitle", description: "Subtitle", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -41,8 +41,8 @@ export class PostEntity extends MetaEntity {
   subtitle: string;
 
   @ApiProperty({
-    example: "Subtitle",
-    description: "Подзаголовок Англ",
+    example: "Subtitle (Eng)",
+    description: "Subtitle (Eng)",
     required: false
   })
   @IsOptional()
@@ -53,16 +53,16 @@ export class PostEntity extends MetaEntity {
   @ApiProperty({
     type: "simple-json",
     example: {
-      alt: "Картинка",
+      alt: "Image",
       url: "https://tviserbuckets.storage.yandexcloud.net/8722fb29-eab8-45c1-b1d9-50d6d3ebe470/79f4bc96707441%201.png"
     },
-    description: "Картинка"
+    description: "Image"
   })
   @IsOptional()
   @Column("simple-json", { default: null })
   image: ImageInterface;
 
-  @ApiProperty({ example: "lg-brand", description: "Слэг", required: true })
+  @ApiProperty({ example: "lg-brand", description: "Url", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -74,14 +74,14 @@ export class PostEntity extends MetaEntity {
 
   @ApiProperty({
     example: "lg-brand",
-    description: "Слэг Англ",
+    description: "Url (Eng)",
     required: true
   })
   @IsOptional()
   @IsString()
   slug__en: string;
 
-  @ApiProperty({ example: "Описание", description: "Краткое описание", required: true })
+  @ApiProperty({ example: "Description", description: "Description", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -93,7 +93,7 @@ export class PostEntity extends MetaEntity {
 
   @ApiProperty({
     example: "Description",
-    description: "Описание Англ",
+    description: "Description (Eng)",
     required: false
   })
   @IsOptional()
@@ -101,7 +101,7 @@ export class PostEntity extends MetaEntity {
   description__en: string;
 
 
-  @ApiProperty({ example: "Текст", description: "Текст поста", required: true })
+  @ApiProperty({ example: "Text", description: "text", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -112,8 +112,8 @@ export class PostEntity extends MetaEntity {
   text: string;
 
   @ApiProperty({
-    example: "Text",
-    description: "Текст Англ",
+    example: "Text ( Eng)",
+    description: "Text (Eng)",
     required: false
   })
   @IsOptional()
@@ -122,13 +122,13 @@ export class PostEntity extends MetaEntity {
 
 
   // @ApiModelProperty({type: Heading})
-  @ApiProperty({ example: [1, 2], description: "headings", required: true })
+  @ApiProperty({ example: [1, 2], description: "Headings Ids", required: true })
   @IsOptional()
   @ManyToMany(() => HeadingEntity, h => h.posts)
   headings: HeadingEntity[];
 
   // @ApiModelProperty({type: Tag})
-  @ApiProperty({ example: [1, 2], description: "tags", required: true })
+  @ApiProperty({ example: [1, 2], description: "Tag Id", required: true })
   @IsOptional()
   @ManyToMany(() => TagEntity, p => p.posts)
   tags: TagEntity[];

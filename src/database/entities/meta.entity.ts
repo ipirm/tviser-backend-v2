@@ -9,7 +9,7 @@ import { DefaultLocale, SupportedLocales } from "../../locale/locale";
 @Entity("meta")
 export class MetaEntity extends BaseEntity {
 
-  @ApiProperty({ example: "Мета тайтл", description: "meta_title", required: true })
+  @ApiProperty({ example: "Meta Title", description: "meta_title", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -20,15 +20,15 @@ export class MetaEntity extends BaseEntity {
   meta_title: string;
 
   @ApiProperty({
-    example: "Meta Title",
-    description: "Мета тайтл Англ",
+    example: "Meta Title (Eng)",
+    description: "Meta Title (Eng)",
     required: false
   })
   @IsOptional()
   @IsString()
   meta_title__en: string;
 
-  @ApiProperty({ example: "Мета описание", description: "meta_description", required: true })
+  @ApiProperty({ example: "Meta description", description: "meta_description", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -39,8 +39,8 @@ export class MetaEntity extends BaseEntity {
   meta_description: string;
 
   @ApiProperty({
-    example: "Meta Description",
-    description: "Meta Description En",
+    example: "Meta Description (Eng)",
+    description: "Meta Description (Eng)",
     required: false
   })
   @IsOptional()
@@ -58,8 +58,8 @@ export class MetaEntity extends BaseEntity {
   meta_keywords: string;
 
   @ApiProperty({
-    example: "Meta keywords",
-    description: "Meta keywords En",
+    example: "Meta keywords (Eng)",
+    description: "Meta keywords (Eng)",
     required: false
   })
   @IsOptional()
@@ -89,8 +89,8 @@ export class MetaEntity extends BaseEntity {
   twitter_title: string;
 
   @ApiProperty({
-    example: "Meta title",
-    description: "Twitter title En",
+    example: "Twitter title (Eng)",
+    description: "Twitter title (Eng)",
     required: false
   })
   @IsOptional()
@@ -109,8 +109,8 @@ export class MetaEntity extends BaseEntity {
   twitter_description: string;
 
   @ApiProperty({
-    example: "Meta description",
-    description: "Meta description En",
+    example: "Twitter description (Eng)",
+    description: "Twitter description (Eng)",
     required: false
   })
   @IsOptional()
@@ -141,15 +141,15 @@ export class MetaEntity extends BaseEntity {
   facebook_title: string;
 
   @ApiProperty({
-    example: "Facebook title",
-    description: "Facebook title En",
+    example: "Facebook title (Eng)",
+    description: "Facebook title (Eng)",
     required: false
   })
   @IsOptional()
   @IsString()
   facebook_title__en: string;
 
-  @ApiProperty({ example: "Facebook description", description: "facebook_desctiption", required: true })
+  @ApiProperty({ example: "Facebook description", description: "facebook_description", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -160,8 +160,8 @@ export class MetaEntity extends BaseEntity {
   facebook_description: string;
 
   @ApiProperty({
-    example: "Facebook description",
-    description: "Facebook description En",
+    example: "Facebook description (Eng)",
+    description: "Facebook description (Eng)",
     required: false
   })
   @IsOptional()

@@ -9,7 +9,7 @@ import { BaseEntity } from "../../database/entities/base.entity";
 @Entity("heading")
 export class HeadingEntity extends BaseEntity {
 
-  @ApiProperty({ example: "Какой то пост с каким то названием", description: "Заголовок", required: true })
+  @ApiProperty({ example: "Title", description: "Title", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -20,15 +20,15 @@ export class HeadingEntity extends BaseEntity {
   title: string;
 
   @ApiProperty({
-    example: "Some post with some title",
-    description: "Заголовок Англ",
+    example: "Title (Eng)",
+    description: "Title (Eng)",
     required: false
   })
   @IsOptional()
   @IsString()
   title__en: string;
 
-  @ApiProperty({ example: "lg-brand", description: "Слэг", required: true })
+  @ApiProperty({ example: "lg-brand", description: "Url", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -40,7 +40,7 @@ export class HeadingEntity extends BaseEntity {
 
   @ApiProperty({
     example: "lg-brand",
-    description: "Слэг Англ",
+    description: "Url (Eng)",
     required: true
   })
   @IsOptional()

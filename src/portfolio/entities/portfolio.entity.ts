@@ -12,7 +12,7 @@ import { CategoryEntity } from "../../category/entities/category.entity";
 @Entity("portfolio")
 export class PortfolioEntity extends MetaEntity {
 
-  @ApiProperty({ example: "Какой то пост с каким то названием", description: "Заголовок", required: true })
+  @ApiProperty({ example: "Title", description: "Title", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -23,8 +23,8 @@ export class PortfolioEntity extends MetaEntity {
   title: string;
 
   @ApiProperty({
-    example: "Some post with some title",
-    description: "Заголовок Англ",
+    example: "Title (Eng)",
+    description: "Title (Eng)",
     required: false
   })
   @IsOptional()
@@ -34,10 +34,10 @@ export class PortfolioEntity extends MetaEntity {
   @ApiProperty({
     type: "simple-json",
     example: {
-      alt: "Картинка",
+      alt: "Image",
       url: "https://tviserbuckets.storage.yandexcloud.net/8722fb29-eab8-45c1-b1d9-50d6d3ebe470/79f4bc96707441%201.png"
     },
-    description: "Картинка"
+    description: "Image"
   })
   @IsOptional()
   @Column("simple-json", { default: null })
@@ -47,21 +47,21 @@ export class PortfolioEntity extends MetaEntity {
     type: "simple-json",
     example: [
       {
-        alt: "Картинка",
+        alt: "Image",
         url: "https://tviserbuckets.storage.yandexcloud.net/8722fb29-eab8-45c1-b1d9-50d6d3ebe470/79f4bc96707441%201.png"
       },
       {
-        alt: "Картинка",
+        alt: "Image",
         url: "https://tviserbuckets.storage.yandexcloud.net/8722fb29-eab8-45c1-b1d9-50d6d3ebe470/79f4bc96707441%201.png"
       }
     ],
-    description: "Картинки"
+    description: "Images"
   })
   @IsOptional()
   @Column("simple-json", { default: null })
   files: ImageInterface[];
 
-  @ApiProperty({ example: "lg-brand", description: "Слэг", required: true })
+  @ApiProperty({ example: "lg-brand", description: "Url", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -73,14 +73,14 @@ export class PortfolioEntity extends MetaEntity {
 
   @ApiProperty({
     example: "lg-brand",
-    description: "Слэг Англ",
+    description: "Url (Eng)",
     required: true
   })
   @IsOptional()
   @IsString()
   slug__en: string;
 
-  @ApiProperty({ example: "Текст", description: "Текст поста", required: true })
+  @ApiProperty({ example: "Text", description: "Post text", required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
@@ -91,20 +91,20 @@ export class PortfolioEntity extends MetaEntity {
   text: string;
 
   @ApiProperty({
-    example: "Some post with some title",
-    description: "Текст Англ",
+    example: "Title (Eng)",
+    description: "Title (Eng)",
     required: false
   })
   @IsOptional()
   @IsString()
   text__en: string;
 
-  @ApiProperty({ example: [1, 2], description: "brandEntities", required: false })
+  @ApiProperty({ example: [1, 2], description: "Brands Ids", required: false })
   @IsOptional()
   @ManyToMany(() => BrandEntity, p => p.portfolioEntities)
   brandEntities: BrandEntity[];
 
-  @ApiProperty({ example: 1, description: "categoryEntity", required: false })
+  @ApiProperty({ example: 1, description: "Category Id", required: false })
   @IsOptional()
   @ManyToOne(type => CategoryEntity, category => category.portfolioEntities)
   categoryEntity?: CategoryEntity;
