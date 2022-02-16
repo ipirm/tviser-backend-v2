@@ -24,6 +24,7 @@ import { LeadModule } from "./lead/lead.module";
 import { PortfolioModule } from "./portfolio/portfolio.module";
 import { ScheduleModule } from "@nestjs/schedule";
 import { BrandModule } from './brand/brand.module';
+import { SettingModule } from './setting/setting.module';
 
 
 @Module({
@@ -54,7 +55,8 @@ import { BrandModule } from './brand/brand.module';
     HeadingModule,
     LeadModule,
     PortfolioModule,
-    BrandModule
+    BrandModule,
+    SettingModule
   ],
   controllers: [AppController],
   providers: [AppService, AwsService]

@@ -8,9 +8,9 @@ import { UserManyDto } from "./dto/user-many.dto";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 
 
-@ApiBearerAuth()
-@ApiSecurity("bearer")
-@UseGuards(JwtAuthGuard)
+// @ApiBearerAuth()
+// @ApiSecurity("bearer")
+// @UseGuards(JwtAuthGuard)
 @ApiTags("User")
 @Crud({
   model: {
