@@ -15,7 +15,7 @@ jobs:
           remote_host: ${{ secrets.SSH_HOST }}
           remote_user: ${{ secrets.SSH_USERNAME }}
           remote_key: ${{ secrets.SSH_KEY }}
-          local_dir: "/"
+          local_dir: "/home/runner/work/tviser-backend-v2/tviser-backend-v2/"
           remote_dir: "/home/sadmin/tviser-backend"
         run: |
           npm install
