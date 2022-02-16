@@ -9,6 +9,9 @@ import { SettingEntity } from "./entities/setting.entity";
 @Crud({
   model: {
     type: SettingEntity
+  },
+  routes: {
+    only: ["getOneBase", "updateOneBase", "getManyBase"]
   }
 })
 @Controller("api/setting")

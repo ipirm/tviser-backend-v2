@@ -1,10 +1,8 @@
-import { Controller, UseGuards } from "@nestjs/common";
+import { Controller } from "@nestjs/common";
 import { TagService } from "./tag.service";
-import { ApiBearerAuth, ApiSecurity, ApiTags } from "@nestjs/swagger";
+import { ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController } from "@nestjsx/crud";
 import { TagEntity } from "./entities/tag.entity";
-import { MetaInstance } from "../interfaces/meta.interface";
-import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 
 // @ApiBearerAuth()
 // @ApiSecurity("bearer")
@@ -22,7 +20,8 @@ import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
       "posts.headings": {
         alias: "headings",
         eager: true,
-        exclude: ["createdAt", "updatedAt", ...Object.keys(MetaInstance)]
+        exclude: ["createdAt", "updatedAt"]
+        //exclude: ["createdAt", "updatedAt", ...Object.keys(MetaInstance)]
       }
     }
   }

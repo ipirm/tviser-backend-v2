@@ -30,26 +30,6 @@ export class BrandEntity extends BaseEntity {
   @IsString()
   name__en: string;
 
-  @ApiProperty({ example: "lg-brand", description: "Слэг", required: true })
-  @IsString()
-  @IsOptional()
-  @I18nColumn({
-    default_language: DefaultLocale,
-    languages: SupportedLocales
-  })
-  @Column({ type: "varchar", length: 500, nullable: true })
-  slug: string;
-
-  @ApiProperty({
-    example: "lg-brand",
-    description: "Слэг Англ",
-    required: true
-  })
-  @IsOptional()
-  @IsString()
-  slug__en: string;
-
-
   @ApiProperty({ example: true, description: "Партнер", required: true })
   @IsBoolean()
   @IsOptional()
