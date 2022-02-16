@@ -1,12 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
 import { PostEntity } from "./entities/post.entity";
 import { CrudRequest } from "@nestjsx/crud";
 import { TagEntity } from "../tag/entities/tag.entity";
 import { HeadingEntity } from "../heading/entities/heading.entity";
 import { I18nRepository } from "typeorm-i18n";
+import { UpdateResult } from "typeorm";
 
 
 @Injectable()
@@ -33,7 +33,7 @@ export class PostService extends TypeOrmCrudService<PostEntity> {
     return await this.post.save(this.post.create(dto));
   }
 
-  async updateOneBase(req: CrudRequest, dto: PostEntity, id: number): Promise<PostEntity> {
+  async updateOneBase(req: CrudRequest, dto: PostEntity, id: number): Promise<UpdateResult> {
 
     if (dto.tags) {
       const tags = await this.tag.findByIds(dto.tags.toString().split(",").map(item => parseInt(item)));
@@ -47,7 +47,8 @@ export class PostService extends TypeOrmCrudService<PostEntity> {
 
     await this.post.update(id, { ...dto });
 
-    return null;
+    return await this.post.update(id, { ...dto });
+    ;
   }
 
   // create(createPostDto: CreatePostDto) {

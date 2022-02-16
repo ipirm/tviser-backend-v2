@@ -1,9 +1,9 @@
-import { Controller, Param, UseGuards } from "@nestjs/common";
+import { Controller, Param } from "@nestjs/common";
 import { PostService } from "./post.service";
-import { ApiBearerAuth, ApiSecurity, ApiTags } from "@nestjs/swagger";
+import { ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController, CrudRequest, Override, ParsedBody, ParsedRequest } from "@nestjsx/crud";
 import { PostEntity } from "./entities/post.entity";
-import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
+import { UpdateResult } from "typeorm";
 
 
 // @ApiBearerAuth()
@@ -43,7 +43,7 @@ export class PostController implements CrudController<PostEntity> {
     @ParsedRequest() req: CrudRequest,
     @ParsedBody() dto: PostEntity,
     @Param("id") id: number
-  ): Promise<any> {
+  ): Promise<UpdateResult> {
     return this.service.updateOneBase(req, dto, id);
   }
 

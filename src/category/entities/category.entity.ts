@@ -3,7 +3,8 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsOptional, IsString } from "class-validator";
 import { I18nColumn } from "typeorm-i18n";
 import { DefaultLocale, SupportedLocales } from "../../locale/locale";
-import { Column, Entity } from "typeorm";
+import { Column, Entity, OneToMany } from "typeorm";
+import { PortfolioEntity } from "../../portfolio/entities/portfolio.entity";
 
 @Entity("category")
 export class CategoryEntity extends MetaEntity {
@@ -64,4 +65,7 @@ export class CategoryEntity extends MetaEntity {
   @IsOptional()
   @IsString()
   description__en: string;
+
+  @OneToMany(type => PortfolioEntity, portfolio => portfolio.categoryEntity, { onDelete: "CASCADE" })
+  portfolioEntities: PortfolioEntity[];
 }

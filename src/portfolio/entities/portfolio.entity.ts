@@ -1,12 +1,12 @@
-import { Column, Entity, ManyToMany } from "typeorm";
+import { Column, Entity, ManyToMany, ManyToOne } from "typeorm";
 import { MetaEntity } from "../../database/entities/meta.entity";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsOptional, IsString } from "class-validator";
 import { ImageInterface } from "../../interfaces/image.inteface";
-import { IsUniq } from "@join-com/typeorm-class-validator-is-uniq";
 import { BrandEntity } from "../../brand/entities/brand.entity";
 import { I18nColumn } from "typeorm-i18n";
 import { DefaultLocale, SupportedLocales } from "../../locale/locale";
+import { CategoryEntity } from "../../category/entities/category.entity";
 
 
 @Entity("portfolio")
@@ -99,9 +99,13 @@ export class PortfolioEntity extends MetaEntity {
   @IsString()
   text__en: string;
 
-  @ApiProperty({ example: [1, 2], description: "brands", required: true })
+  @ApiProperty({ example: [1, 2], description: "brandEntities", required: false })
   @IsOptional()
   @ManyToMany(() => BrandEntity, p => p.portfolioEntities)
   brandEntities: BrandEntity[];
 
+  @ApiProperty({ example: 1, description: "categoryEntity", required: false })
+  @IsOptional()
+  @ManyToOne(type => CategoryEntity, category => category.portfolioEntities)
+  categoryEntity?: CategoryEntity;
 }
