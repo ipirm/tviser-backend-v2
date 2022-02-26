@@ -20,6 +20,7 @@ export class FormOptionEntity extends BaseEntity {
   selector: string;
 
   @ManyToOne(() => FormSelectEntity, f => f.formOptionEntities)
+
   formSelectEntity: FormSelectEntity;
 
 }

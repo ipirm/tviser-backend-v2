@@ -47,7 +47,11 @@ export class CustomerService extends TypeOrmCrudService<CustomerEntity> {
   }
 
   async getOneOption(id: number): Promise<any> {
-    return await this.formOption.findOne(id);
+    const data = this.formOption
+      .createQueryBuilder('formOption')
+      .where('formOption.id = :id', { id })
+      .leftJoinAndSelect('formOption.formSelectEntity', 'formSelectEntity');
+    return await data.getOne();
   }
 
   async updateSelect(id, createSelectDto: CreateSelectDto): Promise<any> {
@@ -57,5 +61,5 @@ export class CustomerService extends TypeOrmCrudService<CustomerEntity> {
   async updateOption(id, createOptionDto: CreateOptionDto): Promise<any> {
     return await this.formOption.update(id, createOptionDto);
   }
-  
+
 }
