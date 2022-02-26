@@ -82,7 +82,7 @@ export class CustomerController implements CrudController<CustomerEntity> {
   @ApiOperation({ summary: "Update One Option" })
   @Patch("option/:id")
   updateOption(@Param("id") id: string, @Body() createOptionDto: CreateOptionDto) {
-    return this.service.updateSelect(id, createOptionDto);
+    return this.service.updateOption(id, createOptionDto);
   }
 
 
