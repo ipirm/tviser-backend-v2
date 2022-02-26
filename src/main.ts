@@ -28,6 +28,8 @@ async function bootstrap() {
     transform: true
   }));
 
+  app.enableCors();
+
   SwaggerModule.setup("api", app, document);
 
   await app.listen(parseInt(process.env.PORT)).then(() => logger.log(`App running on ${process.env.PORT} port`));
