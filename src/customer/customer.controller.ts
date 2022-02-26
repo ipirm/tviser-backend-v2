@@ -62,13 +62,13 @@ export class CustomerController implements CrudController<CustomerEntity> {
   }
 
   @ApiOperation({ summary: "Find One Select" })
-  @Get("select")
+  @Get("select/:id")
   getOneSelect(@Param("id") id: number): Promise<any> {
     return this.service.getOneSelect(id);
   }
 
   @ApiOperation({ summary: "Find One Option" })
-  @Get("option")
+  @Get("option/:id")
   getOneOption(@Param("id") id: number): Promise<any> {
     return this.service.getOneOption(id);
   }
