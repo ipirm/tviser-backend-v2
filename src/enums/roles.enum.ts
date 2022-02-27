@@ -1,5 +1,7 @@
 export enum Role {
   Admin = "admin",
   User = "user",
-  Mida = "mida"
+  Mida = "mida",
+  MidaUser = "mida_user",
+  MidaAdmin = "mida_admin"
 }

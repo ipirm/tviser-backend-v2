@@ -42,4 +42,15 @@ export class AuthController {
         return this.auth.loginMida(loginDto);
     }
 
+    @Post("login/mid-user")
+    @ApiOperation({ summary: "Login as Mid User" })
+    loginMidUser(@Body() loginDto: LoginDto) {
+        return this.auth.loginMidaUser(loginDto);
+    }
+
+    @Post("login/mid-admin")
+    @ApiOperation({ summary: "Login as Mid Admin" })
+    loginMidAdmin(@Body() loginDto: LoginDto) {
+        return this.auth.loginMidaAdmin(loginDto);
+    }
 }

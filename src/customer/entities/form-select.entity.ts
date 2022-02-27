@@ -1,6 +1,7 @@
 import { BaseEntity } from "../../database/entities/base.entity";
 import { Column, Entity, OneToMany } from "typeorm";
 import { FormOptionEntity } from "./form-option.entity";
+import { CustomerEntity } from "./customer.entity";
 
 @Entity("forms")
 export class FormSelectEntity extends BaseEntity {
@@ -10,4 +11,5 @@ export class FormSelectEntity extends BaseEntity {
 
   @OneToMany(() => FormOptionEntity, photo => photo.formSelectEntity)
   formOptionEntities: FormOptionEntity[];
+
 }
