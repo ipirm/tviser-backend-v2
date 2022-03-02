@@ -45,10 +45,8 @@ export class PostService extends TypeOrmCrudService<PostEntity> {
       Object.assign(dto, { headings: [...headings] });
     }
 
-    await this.post.update(id, { ...dto });
-
     return await this.post.update(id, { ...dto });
-    ;
+
   }
 
   // create(createPostDto: CreatePostDto) {
