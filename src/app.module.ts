@@ -26,7 +26,6 @@ import { ScheduleModule } from "@nestjs/schedule";
 import { BrandModule } from './brand/brand.module';
 import { SettingModule } from './setting/setting.module';
 import { CategoryModule } from './category/category.module';
-import { CustomerModule } from './customer/customer.module';
 
 
 @Module({
@@ -59,8 +58,7 @@ import { CustomerModule } from './customer/customer.module';
     PortfolioModule,
     BrandModule,
     SettingModule,
-    CategoryModule,
-    CustomerModule
+    CategoryModule
   ],
   controllers: [AppController],
   providers: [AppService, AwsService]

@@ -14,11 +14,11 @@ export class AuthController {
     constructor(private auth: AuthService) {
     }
 
-    // @Post("login-admin")
-    // @ApiOperation({ summary: "Login as Admin" })
-    // adminLogin(@Body() loginDto: LoginDto) {
-    //     return this.auth.adminLogin(loginDto);
-    // }
+    @Post("login-admin")
+    @ApiOperation({ summary: "Login as Admin" })
+    adminLogin(@Body() loginDto: LoginDto) {
+        return this.auth.adminLogin(loginDto);
+    }
 
 
     @ApiBearerAuth()
@@ -36,21 +36,4 @@ export class AuthController {
         return this.auth.login(loginDto);
     }
 
-    @Post("login/mid")
-    @ApiOperation({ summary: "Login as Mid" })
-    loginMida(@Body() loginDto: LoginDto) {
-        return this.auth.loginMida(loginDto);
-    }
-
-    @Post("login/mid-user")
-    @ApiOperation({ summary: "Login as Mid User" })
-    loginMidUser(@Body() loginDto: LoginDto) {
-        return this.auth.loginMidaUser(loginDto);
-    }
-
-    @Post("login/mid-admin")
-    @ApiOperation({ summary: "Login as Mid Admin" })
-    loginMidAdmin(@Body() loginDto: LoginDto) {
-        return this.auth.loginMidaAdmin(loginDto);
-    }
 }
