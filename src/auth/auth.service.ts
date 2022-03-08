@@ -1,92 +1,103 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
-import { Repository } from "typeorm";
-import { InjectRepository } from "@nestjs/typeorm";
-import { UserService } from "../user/user.service";
-import { LoginDto } from "./dto/login-dto";
-import * as bcrypt from "bcrypt";
-import { Role } from "../enums/roles.enum";
-import { UserEntity } from "../user/entities/user.entity";
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserService } from '../user/user.service';
+import { LoginDto } from './dto/login-dto';
+import * as bcrypt from 'bcrypt';
+import { Role } from '../enums/roles.enum';
+import { UserEntity } from '../user/entities/user.entity';
 
 @Injectable()
 export class AuthService {
-    constructor(
-      private jwtService: JwtService,
-      private userService: UserService,
-      @InjectRepository(UserEntity) private readonly user: Repository<UserEntity>
-    ) {
-    }
+  constructor(
+    private jwtService: JwtService,
+    private userService: UserService,
+    @InjectRepository(UserEntity) private readonly user: Repository<UserEntity>,
+  ) {}
 
+  async adminLogin(loginDto: LoginDto): Promise<any> {
+    const user = await this.user
+      .createQueryBuilder('user')
+      .where('user.email = :email', { email: loginDto.email })
+      .addSelect(['user.password'])
+      .getOne();
 
-    async adminLogin(loginDto: LoginDto): Promise<any> {
-        const user = await this.user.createQueryBuilder("user")
-          .where("user.email = :email", { email: loginDto.email })
-          .addSelect(["user.password"])
-          .getOne();
+    if (!user)
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error:
+            'Извините, пользователь с такой комбинацией логина и пароля не найден',
+        },
+        HttpStatus.FORBIDDEN,
+      );
 
-        if (!user)
-            throw new HttpException({
-                status: HttpStatus.FORBIDDEN,
-                error: "Извините, пользователь с такой комбинацией логина и пароля не найден"
-            }, HttpStatus.FORBIDDEN);
+    const valid = await bcrypt.compare(loginDto.password, user.password);
 
+    if (!valid)
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error:
+            'Извините, пользователь с такой комбинацией логина и пароля не найден',
+        },
+        HttpStatus.FORBIDDEN,
+      );
 
-        const valid = await bcrypt.compare(loginDto.password, user.password);
+    if (user.role !== Role.Admin)
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'Вы не являетесь админом',
+        },
+        HttpStatus.FORBIDDEN,
+      );
 
-        if (!valid)
-            throw new HttpException({
-                status: HttpStatus.FORBIDDEN,
-                error: "Извините, пользователь с такой комбинацией логина и пароля не найден"
-            }, HttpStatus.FORBIDDEN);
+    return {
+      access_token: this.jwtService.sign({ ...user }),
+    };
+  }
 
+  async login(loginDto: LoginDto): Promise<any> {
+    let valid: boolean;
+    const user = await this.user
+      .createQueryBuilder('user')
+      .where('user.email = :email', { email: loginDto.email })
+      .addSelect(['user.password'])
+      .getOne();
 
-        if (user.role !== Role.Admin)
-            throw new HttpException({
-                status: HttpStatus.FORBIDDEN,
-                error: "Вы не являетесь админом"
-            }, HttpStatus.FORBIDDEN);
+    if (!user)
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error:
+            'Извините, пользователь с такой комбинацией логина и пароля не найден',
+        },
+        HttpStatus.FORBIDDEN,
+      );
 
-        return {
-            access_token: this.jwtService.sign({ ...user })
-        };
-    }
+    if (await bcrypt.compare(loginDto.password, user.password)) valid = true;
 
-    async login(loginDto: LoginDto): Promise<any> {
-        let valid: Boolean;
-        const user = await this.user.createQueryBuilder("user")
-          .where("user.email = :email", { email: loginDto.email })
-          .addSelect(["user.password"])
-          .getOne();
+    if (!valid)
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'Неверный пароль',
+        },
+        HttpStatus.FORBIDDEN,
+      );
 
-        if (!user)
-            throw new HttpException({
-                status: HttpStatus.FORBIDDEN,
-                error: "Извините, пользователь с такой комбинацией логина и пароля не найден"
-            }, HttpStatus.FORBIDDEN);
+    return {
+      access_token: this.jwtService.sign({ ...user }),
+    };
+  }
 
-        if (await bcrypt.compare(loginDto.password, user.password))
-            valid = true;
-
-
-        if (!valid)
-            throw new HttpException({
-                status: HttpStatus.FORBIDDEN,
-                error: "Неверный пароль"
-            }, HttpStatus.FORBIDDEN);
-
-
-        return {
-            access_token: this.jwtService.sign({ ...user })
-        };
-    }
-
-
-    async profile(user: any): Promise<any> {
-        return await this.user
-          .createQueryBuilder("user")
-          .select(["user.id", "user.name", "user.email", "user.role"])
-          .where("user.id = :id", { id: user.id })
-          .getOne();
-    }
-
+  async profile(user: any): Promise<any> {
+    return await this.user
+      .createQueryBuilder('user')
+      .select(['user.id', 'user.name', 'user.email', 'user.role'])
+      .where('user.id = :id', { id: user.id })
+      .getOne();
+  }
 }

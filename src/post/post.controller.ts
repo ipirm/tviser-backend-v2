@@ -1,39 +1,44 @@
-import { Controller, Param } from "@nestjs/common";
-import { PostService } from "./post.service";
-import { ApiTags } from "@nestjs/swagger";
-import { Crud, CrudController, CrudRequest, Override, ParsedBody, ParsedRequest } from "@nestjsx/crud";
-import { PostEntity } from "./entities/post.entity";
-import { UpdateResult } from "typeorm";
-
+import { Controller, Param } from '@nestjs/common';
+import { PostService } from './post.service';
+import { ApiTags } from '@nestjs/swagger';
+import {
+  Crud,
+  CrudController,
+  CrudRequest,
+  Override,
+  ParsedBody,
+  ParsedRequest,
+} from '@nestjsx/crud';
+import { PostEntity } from './entities/post.entity';
+import { UpdateResult } from 'typeorm';
 
 // @ApiBearerAuth()
 // @ApiSecurity("bearer")
 // @UseGuards(JwtAuthGuard)
-@ApiTags("Post")
+@ApiTags('Post')
 @Crud({
   model: {
-    type: PostEntity
+    type: PostEntity,
   },
   query: {
     join: {
       headings: {
-        eager: true
+        eager: true,
       },
       tags: {
-        eager: true
-      }
-    }
-  }
+        eager: true,
+      },
+    },
+  },
 })
-@Controller("api/post")
+@Controller('api/post')
 export class PostController implements CrudController<PostEntity> {
-  constructor(public service: PostService) {
-  }
+  constructor(public service: PostService) {}
 
   @Override()
   createOne(
     @ParsedRequest() req: CrudRequest,
-    @ParsedBody() dto: PostEntity
+    @ParsedBody() dto: PostEntity,
   ): Promise<PostEntity> {
     return this.service.createOneBase(req, dto);
   }
@@ -42,7 +47,7 @@ export class PostController implements CrudController<PostEntity> {
   updateOne(
     @ParsedRequest() req: CrudRequest,
     @ParsedBody() dto: PostEntity,
-    @Param("id") id: number
+    @Param('id') id: number,
   ): Promise<UpdateResult> {
     return this.service.updateOneBase(req, dto, id);
   }

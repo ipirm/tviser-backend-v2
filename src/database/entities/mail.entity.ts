@@ -1,6 +1,1 @@
-
-
-
-export class MailEntity {
-
-}
+export class MailEntity {}

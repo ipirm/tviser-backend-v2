@@ -1,13 +1,15 @@
-import { Injectable } from "@nestjs/common";
-import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
-import { InjectRepository } from "@nestjs/typeorm";
-import { TagEntity } from "./entities/tag.entity";
-import { I18nRepository } from "typeorm-i18n";
-
+import { Injectable } from '@nestjs/common';
+import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { TagEntity } from './entities/tag.entity';
+import { I18nRepository } from 'typeorm-i18n';
 
 @Injectable()
 export class TagService extends TypeOrmCrudService<TagEntity> {
-  constructor(@InjectRepository(TagEntity) private readonly tag: I18nRepository<TagEntity>) {
+  constructor(
+    @InjectRepository(TagEntity)
+    private readonly tag: I18nRepository<TagEntity>,
+  ) {
     super(tag);
   }
 

@@ -1,29 +1,28 @@
-import { Controller } from "@nestjs/common";
-import { BrandService } from "./brand.service";
-import { ApiTags } from "@nestjs/swagger";
-import { Crud, CrudController } from "@nestjsx/crud";
-import { BrandEntity } from "./entities/brand.entity";
+import { Controller } from '@nestjs/common';
+import { BrandService } from './brand.service';
+import { ApiTags } from '@nestjs/swagger';
+import { Crud, CrudController } from '@nestjsx/crud';
+import { BrandEntity } from './entities/brand.entity';
 
 // @ApiBearerAuth()
 // @ApiSecurity("bearer")
 // @UseGuards(JwtAuthGuard)
-@ApiTags("Brand")
+@ApiTags('Brand')
 @Crud({
   model: {
-    type: BrandEntity
+    type: BrandEntity,
   },
   query: {
     join: {
       portfolioEntities: {
-        eager: false
-      }
-    }
-  }
+        eager: false,
+      },
+    },
+  },
 })
-@Controller("api/brand")
+@Controller('api/brand')
 export class BrandController implements CrudController<BrandEntity> {
-  constructor(public service: BrandService) {
-  }
+  constructor(public service: BrandService) {}
 
   // @Post()
   // create(@Body() createBrandDto: CreateBrandDto) {

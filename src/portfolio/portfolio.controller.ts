@@ -1,42 +1,48 @@
-import { Controller, Param } from "@nestjs/common";
-import { PortfolioService } from "./portfolio.service";
-import { ApiTags } from "@nestjs/swagger";
-import { Crud, CrudController, CrudRequest, Override, ParsedBody, ParsedRequest } from "@nestjsx/crud";
-import { PortfolioEntity } from "./entities/portfolio.entity";
-import { UpdateResult } from "typeorm";
-import { MetaInstance } from "../interfaces/meta.interface";
+import { Controller, Param } from '@nestjs/common';
+import { PortfolioService } from './portfolio.service';
+import { ApiTags } from '@nestjs/swagger';
+import {
+  Crud,
+  CrudController,
+  CrudRequest,
+  Override,
+  ParsedBody,
+  ParsedRequest,
+} from '@nestjsx/crud';
+import { PortfolioEntity } from './entities/portfolio.entity';
+import { UpdateResult } from 'typeorm';
+import { MetaInstance } from '../interfaces/meta.interface';
 
 // @ApiBearerAuth()
 // @ApiSecurity("bearer")
 // @UseGuards(JwtAuthGuard)
-@ApiTags("Portfolio")
+@ApiTags('Portfolio')
 @Crud({
   model: {
-    type: PortfolioEntity
+    type: PortfolioEntity,
   },
   query: {
     join: {
       brandEntities: {
         eager: true,
-        exclude: ["createdAt", "updatedAt"]
+        exclude: ['createdAt', 'updatedAt'],
       },
       categoryEntity: {
-        alias: "categoryEntity",
+        alias: 'categoryEntity',
         eager: true,
-        exclude: ["createdAt", "updatedAt", ...Object.keys(MetaInstance)]
-      }
-    }
-  }
+        exclude: ['createdAt', 'updatedAt', ...Object.keys(MetaInstance)],
+      },
+    },
+  },
 })
-@Controller("api/portfolio")
+@Controller('api/portfolio')
 export class PortfolioController implements CrudController<PortfolioEntity> {
-  constructor(public service: PortfolioService) {
-  }
+  constructor(public service: PortfolioService) {}
 
   @Override()
   createOne(
     @ParsedRequest() req: CrudRequest,
-    @ParsedBody() dto: PortfolioEntity
+    @ParsedBody() dto: PortfolioEntity,
   ): Promise<PortfolioEntity> {
     return this.service.createOneBase(req, dto);
   }
@@ -45,7 +51,7 @@ export class PortfolioController implements CrudController<PortfolioEntity> {
   updateOne(
     @ParsedRequest() req: CrudRequest,
     @ParsedBody() dto: PortfolioEntity,
-    @Param("id") id: number
+    @Param('id') id: number,
   ): Promise<UpdateResult> {
     return this.service.updateOneBase(req, dto, id);
   }

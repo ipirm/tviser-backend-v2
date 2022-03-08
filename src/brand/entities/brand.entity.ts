@@ -1,54 +1,52 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsOptional, IsString } from "class-validator";
-import { Column, Entity, JoinTable, ManyToMany } from "typeorm";
-import { BaseEntity } from "../../database/entities/base.entity";
-import { ImageInterface } from "../../interfaces/image.inteface";
-import { PortfolioEntity } from "../../portfolio/entities/portfolio.entity";
-import { I18nColumn } from "typeorm-i18n";
-import { DefaultLocale, SupportedLocales } from "../../locale/locale";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
+import { BaseEntity } from '../../database/entities/base.entity';
+import { ImageInterface } from '../../interfaces/image.inteface';
+import { PortfolioEntity } from '../../portfolio/entities/portfolio.entity';
+import { I18nColumn } from 'typeorm-i18n';
+import { DefaultLocale, SupportedLocales } from '../../locale/locale';
 
-
-@Entity("brand")
+@Entity('brand')
 export class BrandEntity extends BaseEntity {
-
-  @ApiProperty({ example: "LG", description: "Brand/Partner", required: true })
+  @ApiProperty({ example: 'LG', description: 'Brand/Partner', required: true })
   @IsString()
   @IsOptional()
   @I18nColumn({
     default_language: DefaultLocale,
-    languages: SupportedLocales
+    languages: SupportedLocales,
   })
-  @Column({ type: "varchar", length: 500, nullable: true })
+  @Column({ type: 'varchar', length: 500, nullable: true })
   name: string;
 
   @ApiProperty({
-    example: "LG",
-    description: "Brand/Partner (ENG)",
-    required: true
+    example: 'LG',
+    description: 'Brand/Partner (ENG)',
+    required: true,
   })
   @IsOptional()
   @IsString()
   name__en: string;
 
-  @ApiProperty({ example: true, description: "isPartner", required: true })
+  @ApiProperty({ example: true, description: 'isPartner', required: true })
   @IsBoolean()
   @IsOptional()
-  @Column({ type: "boolean", default: false })
+  @Column({ type: 'boolean', default: false })
   is_partner: boolean;
 
   @ApiProperty({
-    type: "simple-json",
+    type: 'simple-json',
     example: {
-      alt: "Image",
-      url: "https://tviserbuckets.storage.yandexcloud.net/8722fb29-eab8-45c1-b1d9-50d6d3ebe470/79f4bc96707441%201.png"
+      alt: 'Image',
+      url: 'https://tviserbuckets.storage.yandexcloud.net/8722fb29-eab8-45c1-b1d9-50d6d3ebe470/79f4bc96707441%201.png',
     },
-    description: "Image"
+    description: 'Image',
   })
   @IsOptional()
-  @Column("simple-json", { default: null })
+  @Column('simple-json', { default: null })
   image: ImageInterface;
 
-  @ManyToMany(() => PortfolioEntity, t => t.brandEntities)
+  @ManyToMany(() => PortfolioEntity, (t) => t.brandEntities)
   @JoinTable()
   portfolioEntities: PortfolioEntity[];
 }

@@ -1,23 +1,22 @@
-import { Controller, UseGuards } from "@nestjs/common";
-import { LeadService } from "./lead.service";
-import { ApiBearerAuth, ApiSecurity, ApiTags } from "@nestjs/swagger";
-import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
-import { Crud, CrudController } from "@nestjsx/crud";
-import { LeadEntity } from "./entities/lead.entity";
+import { Controller, UseGuards } from '@nestjs/common';
+import { LeadService } from './lead.service';
+import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { Crud, CrudController } from '@nestjsx/crud';
+import { LeadEntity } from './entities/lead.entity';
 
 // @ApiBearerAuth()
 // @ApiSecurity("bearer")
 // @UseGuards(JwtAuthGuard)
-@ApiTags("Lead")
+@ApiTags('Lead')
 @Crud({
   model: {
-    type: LeadEntity
-  }
+    type: LeadEntity,
+  },
 })
-@Controller("api/lead")
+@Controller('api/lead')
 export class LeadController implements CrudController<LeadEntity> {
-  constructor(public service: LeadService) {
-  }
+  constructor(public service: LeadService) {}
 
   // @Post()
   // create(@Body() createLeadDto: CreateLeadDto) {

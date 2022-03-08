@@ -3,8 +3,7 @@ export interface ImageInterface {
   url: string;
 }
 
-
 export const ImageInstance: ImageInterface = {
-  alt: "",
-  url: ""
+  alt: '',
+  url: '',
 };

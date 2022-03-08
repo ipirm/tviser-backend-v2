@@ -1,74 +1,82 @@
-import { Controller, Delete, Param, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
-import { AppService } from "./app.service";
-import { FileInterceptor } from "@nestjs/platform-express";
-import { ApiBody, ApiConsumes, ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
+import {
+  Controller,
+  Delete,
+  Param,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
+import { AppService } from './app.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import {
+  ApiBody,
+  ApiConsumes,
+  ApiOperation,
+  ApiParam,
+  ApiTags,
+} from '@nestjs/swagger';
 
-
-@ApiTags("Default")
-@Controller("api")
+@ApiTags('Default')
+@Controller('api')
 export class AppController {
-  constructor(private readonly appService: AppService) {
-  }
+  constructor(private readonly appService: AppService) {}
 
   // @ApiBearerAuth()
   // @UseGuards(JwtAuthGuard)
   @ApiParam({
-    name: "alt",
+    name: 'alt',
     required: true,
     type: String,
-    example: "Image",
-    description: "Alt file"
+    example: 'Image',
+    description: 'Alt file',
   })
   @ApiParam({
-    name: "folder",
+    name: 'folder',
     required: true,
     type: String,
-    example: "portfolio",
-    description: "File folder"
+    example: 'portfolio',
+    description: 'File folder',
   })
-  @ApiOperation({ summary: "Upload file to server" })
+  @ApiOperation({ summary: 'Upload file to server' })
   @ApiBody({
     schema: {
-      type: "object",
+      type: 'object',
       properties: {
         file: {
-          type: "string",
-          format: "binary"
-        }
-      }
-    }
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
   })
-  @ApiConsumes("multipart/form-data")
-  @Post("upload/:alt/:folder")
-  @UseInterceptors(FileInterceptor("file"))
+  @ApiConsumes('multipart/form-data')
+  @Post('upload/:alt/:folder')
+  @UseInterceptors(FileInterceptor('file'))
   uploadFile(
     @UploadedFile() file: Express.Multer.File,
-    @Param("alt") alt: string,
-    @Param("folder") folder: string
+    @Param('alt') alt: string,
+    @Param('folder') folder: string,
   ) {
     return this.appService.uploadFile(file, alt, folder);
   }
 
   @ApiParam({
-    name: "name",
+    name: 'name',
     required: true,
     type: String,
-    example: "Name",
-    description: "File Name"
+    example: 'Name',
+    description: 'File Name',
   })
   @ApiParam({
-    name: "folder",
+    name: 'folder',
     required: true,
     type: String,
-    example: "portfolio",
-    description: "File folder"
+    example: 'portfolio',
+    description: 'File folder',
   })
-  @ApiOperation({ summary: "Remove file from server" })
-  @Delete("remove/:name/:folder")
-  removeFile(
-    @Param("name") name: string,
-    @Param("folder") folder: string
-  ) {
+  @ApiOperation({ summary: 'Remove file from server' })
+  @Delete('remove/:name/:folder')
+  removeFile(@Param('name') name: string, @Param('folder') folder: string) {
     return this.appService.removeFile(name, folder);
   }
 }

@@ -1,35 +1,34 @@
-import { Controller } from "@nestjs/common";
-import { TagService } from "./tag.service";
-import { ApiTags } from "@nestjs/swagger";
-import { Crud, CrudController } from "@nestjsx/crud";
-import { TagEntity } from "./entities/tag.entity";
+import { Controller } from '@nestjs/common';
+import { TagService } from './tag.service';
+import { ApiTags } from '@nestjs/swagger';
+import { Crud, CrudController } from '@nestjsx/crud';
+import { TagEntity } from './entities/tag.entity';
 
 // @ApiBearerAuth()
 // @ApiSecurity("bearer")
 // @UseGuards(JwtAuthGuard)
-@ApiTags("Tag")
+@ApiTags('Tag')
 @Crud({
   model: {
-    type: TagEntity
+    type: TagEntity,
   },
   query: {
     join: {
       posts: {
-        eager: true
-      },
-      "posts.headings": {
-        alias: "headings",
         eager: true,
-        exclude: ["createdAt", "updatedAt"]
+      },
+      'posts.headings': {
+        alias: 'headings',
+        eager: true,
+        exclude: ['createdAt', 'updatedAt'],
         //exclude: ["createdAt", "updatedAt", ...Object.keys(MetaInstance)]
-      }
-    }
-  }
+      },
+    },
+  },
 })
-@Controller("api/tag")
+@Controller('api/tag')
 export class TagController implements CrudController<TagEntity> {
-  constructor(public service: TagService) {
-  }
+  constructor(public service: TagService) {}
 
   // @Post()
   // create(@Body() createTagDto: CreateTagDto) {

@@ -3,5 +3,5 @@ export interface LocaleMap {
   en: string;
 }
 
-export const SupportedLocales = ["ru", "en"];
-export const DefaultLocale = "ru";
+export const SupportedLocales = ['ru', 'en'];
+export const DefaultLocale = 'ru';

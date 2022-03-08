@@ -1,36 +1,34 @@
-import { Controller, UseGuards } from "@nestjs/common";
-import { HeadingService } from "./heading.service";
-import { ApiBearerAuth, ApiSecurity, ApiTags } from "@nestjs/swagger";
-import { Crud, CrudController } from "@nestjsx/crud";
-import { HeadingEntity } from "./entities/heading.entity";
-import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
-
+import { Controller, UseGuards } from '@nestjs/common';
+import { HeadingService } from './heading.service';
+import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
+import { Crud, CrudController } from '@nestjsx/crud';
+import { HeadingEntity } from './entities/heading.entity';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 // @ApiBearerAuth()
 // @ApiSecurity("bearer")
 // @UseGuards(JwtAuthGuard)
-@ApiTags("Heading")
+@ApiTags('Heading')
 @Crud({
   model: {
-    type: HeadingEntity
+    type: HeadingEntity,
   },
   query: {
     join: {
       posts: {
-        eager: true
-      },
-      "posts.tags": {
-        alias: "tags",
         eager: true,
-        exclude: ["color", "createdAt", "updatedAt"]
-      }
-    }
-  }
+      },
+      'posts.tags': {
+        alias: 'tags',
+        eager: true,
+        exclude: ['color', 'createdAt', 'updatedAt'],
+      },
+    },
+  },
 })
-@Controller("api/heading")
+@Controller('api/heading')
 export class HeadingController implements CrudController<HeadingEntity> {
-  constructor(public readonly service: HeadingService) {
-  }
+  constructor(public readonly service: HeadingService) {}
 
   // @Post()
   // create(@Body() createHeadingDto: CreateHeadingDto) {

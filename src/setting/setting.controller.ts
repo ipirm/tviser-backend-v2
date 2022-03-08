@@ -1,23 +1,21 @@
-import { Controller } from "@nestjs/common";
-import { SettingService } from "./setting.service";
-import { ApiTags } from "@nestjs/swagger";
-import { Crud, CrudController } from "@nestjsx/crud";
-import { SettingEntity } from "./entities/setting.entity";
+import { Controller } from '@nestjs/common';
+import { SettingService } from './setting.service';
+import { ApiTags } from '@nestjs/swagger';
+import { Crud, CrudController } from '@nestjsx/crud';
+import { SettingEntity } from './entities/setting.entity';
 
-
-@ApiTags("Setting")
+@ApiTags('Setting')
 @Crud({
   model: {
-    type: SettingEntity
+    type: SettingEntity,
   },
   routes: {
-    only: ["getOneBase", "updateOneBase", "getManyBase"]
-  }
+    only: ['getOneBase', 'updateOneBase', 'getManyBase'],
+  },
 })
-@Controller("api/setting")
+@Controller('api/setting')
 export class SettingController implements CrudController<SettingEntity> {
-  constructor(public service: SettingService) {
-  }
+  constructor(public service: SettingService) {}
 
   // @Post()
   // create(@Body() createSettingDto: CreateSettingDto) {

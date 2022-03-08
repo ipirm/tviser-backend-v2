@@ -1,5 +1,4 @@
 export enum LocaleEnum {
-  RU = "ru",
-  EN = "en"
-
+  RU = 'ru',
+  EN = 'en',
 }

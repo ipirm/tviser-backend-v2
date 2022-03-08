@@ -1,15 +1,15 @@
-import { Injectable } from "@nestjs/common";
-import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { BrandEntity } from "./entities/brand.entity";
-import { I18nRepository } from "typeorm-i18n";
-
+import { Injectable } from '@nestjs/common';
+import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { BrandEntity } from './entities/brand.entity';
+import { I18nRepository } from 'typeorm-i18n';
 
 @Injectable()
 export class BrandService extends TypeOrmCrudService<BrandEntity> {
   constructor(
-    @InjectRepository(BrandEntity) private readonly brandEntityRepository: I18nRepository<BrandEntity>
+    @InjectRepository(BrandEntity)
+    private readonly brandEntityRepository: I18nRepository<BrandEntity>,
   ) {
     super(brandEntityRepository);
   }

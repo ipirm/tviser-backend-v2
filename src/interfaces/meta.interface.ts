@@ -1,5 +1,4 @@
-import { ImageInterface } from "./image.inteface";
-
+import { ImageInterface } from './image.inteface';
 
 export interface MetaInterface {
   meta_title: string;
@@ -15,23 +14,23 @@ export interface MetaInterface {
 }
 
 export const MetaInstance: MetaInterface = {
-  meta_description: "",
+  meta_description: '',
   meta_image: {
-    alt: "",
-    url: ""
+    alt: '',
+    url: '',
   },
-  meta_keywords: "",
-  meta_title: "",
+  meta_keywords: '',
+  meta_title: '',
   facebook_image: {
-    alt: "",
-    url: ""
+    alt: '',
+    url: '',
   },
-  facebook_description: "",
-  facebook_title: "",
-  twitter_description: "",
+  facebook_description: '',
+  facebook_title: '',
+  twitter_description: '',
   twitter_image: {
-    alt: "",
-    url: ""
+    alt: '',
+    url: '',
   },
-  twitter_title: ""
+  twitter_title: '',
 };
